@@ -24,17 +24,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script>
     document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    lesson = getParameterByName('lesson');
-    if (lesson){
-        $('#external-markdown').data('markdown', '../lesson' + lesson +'/slides.md'); 
-    }
     </script>
 
         <!--[if lt IE 9]>
@@ -56,6 +45,16 @@
         <script src="js/reveal.min.js"></script>
 
         <script>
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            lesson = getParameterByName('lesson');
+            if (lesson){
+                $('#external-markdown').attr('data-markdown', '../lesson' + lesson +'/slides.md'); 
+            }
 
             // Full list of configuration options available here:
             // https://github.com/hakimel/reveal.js#configuration
